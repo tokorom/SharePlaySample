@@ -10,8 +10,6 @@ import GroupActivities
 import UIKit
 
 class ViewController: AVPlayerViewController {
-    static let movieURL: URL? = URL(string: "https://devstreaming-cdn.apple.com/videos/wwdc/2019/408bmshwds7eoqow1ud/408/hls_vod_mvp.m3u8")
-
     private var groupSession: GroupSession<MovieWatchingActivity>?
 
     override func viewDidLoad() {
@@ -23,7 +21,7 @@ class ViewController: AVPlayerViewController {
     }
 
     private func setupPlayer() {
-        guard player == nil, let movieURL = Self.movieURL else {
+        guard player == nil, let movieURL = MovieWatchingActivity.movieURL else {
             return
         }
 
@@ -60,11 +58,13 @@ class ViewController: AVPlayerViewController {
 }
 
 struct MovieWatchingActivity: GroupActivity {
+    static let movieURL: URL? = URL(string: "https://devstreaming-cdn.apple.com/videos/wwdc/2019/408bmshwds7eoqow1ud/408/hls_vod_mvp.m3u8")
+
     static let activityIdentifier = "work.spinners.SharePlaySample.GroupWatching"
     
     var metadata: GroupActivityMetadata {
         var metadata = GroupActivityMetadata()
-        metadata.fallbackURL = ViewController.movieURL
+        metadata.fallbackURL = Self.movieURL
         metadata.previewImage = UIImage(named: "wwdc19")?.cgImage
         metadata.title = "Sample"
         metadata.subtitle = "WWDC19 Session Video"

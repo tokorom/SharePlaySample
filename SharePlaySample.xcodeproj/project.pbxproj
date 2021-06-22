@@ -295,6 +295,7 @@
 				DEVELOPMENT_TEAM = 5AXCX2DUCQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareMovie;
 				INFOPLIST_KEY_CFBundleExecutable = SharePlaySample;
 				INFOPLIST_KEY_CFBundleName = SharePlaySample;
 				INFOPLIST_KEY_CFBundleVersion = 1;
@@ -328,6 +329,7 @@
 				DEVELOPMENT_TEAM = 5AXCX2DUCQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareMovie;
 				INFOPLIST_KEY_CFBundleExecutable = SharePlaySample;
 				INFOPLIST_KEY_CFBundleName = SharePlaySample;
 				INFOPLIST_KEY_CFBundleVersion = 1;

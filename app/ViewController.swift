@@ -33,12 +33,12 @@ class ViewController: AVPlayerViewController {
     private func prepareSharePlay() {
         let activity = MovieWatchingActivity()
         
-        async {
+        Task {
             switch await activity.prepareForActivation() {
             case .activationDisabled:
                 break
             case .activationPreferred:
-                activity.activate()
+                _ = try await activity.activate()
             case .cancelled:
                 break
             default: ()
@@ -47,7 +47,7 @@ class ViewController: AVPlayerViewController {
     }
 
     private func listenForGroupSession() {
-        async {
+        Task {
             for await session in MovieWatchingActivity.sessions() {
                 groupSession = session
                 player?.playbackCoordinator.coordinateWithSession(session)
@@ -59,12 +59,13 @@ class ViewController: AVPlayerViewController {
 
 struct MovieWatchingActivity: GroupActivity {
     static let movieURL: URL? = URL(string: "https://devstreaming-cdn.apple.com/videos/wwdc/2019/408bmshwds7eoqow1ud/408/hls_vod_mvp.m3u8")
+    static let fallbackURL: URL? = URL(string: "https://spinners.work/")
 
     static let activityIdentifier = "work.spinners.SharePlaySample.GroupWatching"
     
     var metadata: GroupActivityMetadata {
         var metadata = GroupActivityMetadata()
-        metadata.fallbackURL = Self.movieURL
+        metadata.fallbackURL = Self.fallbackURL
         metadata.previewImage = UIImage(named: "wwdc19")?.cgImage
         metadata.title = "Sample"
         metadata.subtitle = "WWDC19 Session Video"
